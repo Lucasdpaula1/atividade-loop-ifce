@@ -24,34 +24,38 @@
 // continuação exercicio 1 ( opcional, gosto de fazer para expandir ainda mais as diversas formas de resolver um mesmo problema) utilizando uma forma recursiva
 
 function part2() {
-  const numeroÍmparesMultiplo3 = [];
-  const numerosGlobais = [];
-
-  const recursiva = (quantidadeVezes) => {
-    if (quantidadeVezes < 1) {
-      let somatoria = numeroÍmparesMultiplo3.reduce(
-        (acumulador, valorAtual) => {
-          return acumulador + valorAtual;
-        }
-      );
-      console.log(
-        `usanod a recursividade, o total de numeros impares divisivel por 3 são ${numeroÍmparesMultiplo3.length} e o somatório é ${somatoria}`
-      );
-      return somatoria;
-    }
-    numerosGlobais.push(quantidadeVezes);
-
-    const forreach = (element) => {
-      if (!numeroÍmparesMultiplo3.includes(element)) {
-        if (element % 2 != 0 && element % 3 === 0) {
-          numeroÍmparesMultiplo3.push(element);
-        }
+  const button = document.getElementById("button");
+  const numeroAleatorio = document.querySelector("#numero_aleatorio");
+  button.addEventListener("click", () => {
+    const numeroÍmparesMultiplo3 = [];
+    const numerosGlobais = [];
+    const recursiva = (quantidadeVezes) => {
+      if (quantidadeVezes < 1) {
+        let somatoria = numeroÍmparesMultiplo3.reduce(
+          (acumulador, valorAtual) => {
+            return acumulador + valorAtual;
+          }
+        );
+        // console.log(
+        //   `usanod a recursividade, o total de numeros impares divisivel por 3 são ${numeroÍmparesMultiplo3.length} e o somatório é ${somatoria}`
+        // );
+        alert(somatoria);
+        return somatoria;
       }
+      numerosGlobais.push(quantidadeVezes);
+
+      const forreach = (element) => {
+        if (!numeroÍmparesMultiplo3.includes(element)) {
+          if (element % 2 != 0 && element % 3 === 0) {
+            numeroÍmparesMultiplo3.push(element);
+          }
+        }
+      };
+      numerosGlobais.forEach(forreach);
+      recursiva(quantidadeVezes - 1);
     };
-    numerosGlobais.forEach(forreach);
-    recursiva(quantidadeVezes - 1);
-  };
-  recursiva(500);
+    recursiva(numeroAleatorio.value);
+  });
 }
 part2();
 //  nesse segundo exemplo, eu quis fazer uma recursiviade que é o ato de uma função se auto chamar, tive que tomar uns cuidados para que não houvesse quebra de pilha que seria quando a função não soubesse  quando ela teria que parar de  se auto invocar dentro de si mesma, por isso construi uma  condição de parada que olhava para o seu próprio parametro. ja neste  eu  tbm quis fazer algo decrescente sendo que começa por 500 e vai em cada chamada subtraindo 1 e verificando esse valor através ddo foreach se é um numero impar e multiplo de 3 e no final somandod tudo.
